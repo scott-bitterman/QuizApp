@@ -1,0 +1,35 @@
+{
+  "name": "trustlayer_coding_challenge",
+  "version": "1.0.0",
+  "description": "TrustLayer Coding Challenge",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint index.js",
+    "start": "node ./src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "TrustLayerCodingChallenge"
+  },
+  "keywords": [
+    "TrustLayer"
+  ],
+  "author": "Scott Bitterman",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "3.5.0",
+    "bcrypt": "5.0.1",
+    "body-parser": "1.19.1",
+    "express": "4.17.2",
+    "express-graphql": "^0.12.0",
+    "graphql": "15.8.0",
+    "jsonwebtoken": "8.5.1",
+    "mongodb": "4.2.2"
+  },
+  "devDependencies": {
+    "eslint": "8.5.0",
+    "jest": "27.4.5"
+  }
+}
