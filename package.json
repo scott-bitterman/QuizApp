@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint index.js",
-    "start": "node ./src/index"
+    "start": "nodemon ./src/index.js localhost 4000"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "bcrypt": "5.0.1",
     "body-parser": "1.19.1",
     "express": "4.17.2",
-    "express-graphql": "^0.12.0",
+    "express-graphql": "0.12.0",
     "graphql": "15.8.0",
     "jsonwebtoken": "8.5.1",
     "mongodb": "4.2.2"

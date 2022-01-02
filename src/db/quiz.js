@@ -12,20 +12,20 @@ async function find(id) {
   return quizzes;
 }
 
-async function update({id, ...update}) {
+async function updateOne({id, ...update}) {
   const quizzes = await Quiz.updateOne(id, update);
   return quizzes;
 }
 
-async function remove(id) {
-  console.log('in quiz db ', id)
+async function deleteOne(id) {
+  // console.log('in quiz db ', id)
   const quizzes = await Quiz.deleteOne(id);
   return quizzes;
 }
 
 export default {
-  remove,
+  deleteOne,
   find,
   insert,
-  update,
+  updateOne,
 };

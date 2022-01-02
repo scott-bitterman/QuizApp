@@ -4,12 +4,12 @@ import Quiz from '../db/quiz.js';
 import CONSTANTS from '../constants.js';
 
 export default {
-  // EXIST!
+  // Basic Existence
   hello: () => {
-    return 'Hello world!';
+    return 'Howdy world!';
   },
 
-  // USER CRUD
+  // User CRUD
   authenticate: async ({input}) => {
     const authenticated = await User.authenticate(input);
     if (authenticated) {
@@ -24,23 +24,23 @@ export default {
     return { id, email };
   },
 
-  // QUIZ CRUD
+  // Quiz CRUD
   quizCreate: async ({input}) => {
     const quiz = await Quiz.insert(input);
     return quiz;
   },
-  quizDelete: async ({input}) => {
+  quizDeleteOne: async ({input}) => {
     console.log(input)
-    const quiz = await Quiz.remove(input);
+    const quiz = await Quiz.deleteOne(input);
     return quiz;
   },
   quizFind: async ({input}) => {
-    console.log(input)
+    console.log('quizFind', {input});
     const quizes = await Quiz.find(input);
     return quizes;
   },
   quizUpdate: async ({input}) => {
-    const quiz = await Quiz.update(input);
+    const quiz = await Quiz.updateOne(input);
     return quiz;
   },
 

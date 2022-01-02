@@ -38,7 +38,7 @@ export default buildSchema(`
       userCreate(input: UserInput): User
 
       quizCreate(input: QuizInput): String
-      quizDelete(input: ID): String
+      quizDeleteOne(input: ID): String
       quizUpdate(input: QuizInput): String
   }
 `);
