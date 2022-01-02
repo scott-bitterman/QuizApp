@@ -1,13 +1,7 @@
-// import Mongo from './mongo.js';
-import bcrypt from 'bcrypt';
-import { ObjectId, MongoClient } from 'mongodb';
-import CONSTANTS from '../constants.js';
-const { username, password, connection } = CONSTANTS.mongoDB;
-const uri = `mongodb+srv://${username}:${password}${connection}`;
-const client = new MongoClient(uri);
-const collectionName = 'user';
+import Mongo from './mongo.js';
+const Quiz = new Mongo('user');
 
-async function upsert({ email, password }) {
+async function insertOne({ email, password }) {
   try {
     await client.connect();
     const database = client.db('TrustLayer');
@@ -44,11 +38,7 @@ async function authenticate({ email, password }) {
   }
 }
 
-const user = { email: 'christine@gmail.com', password: '12345'};
-upsert(user)
-// authenticate(user)
-.then(console.log)
-
 export default {
-  upsert
+  authenticate,
+  insertOne,
 };
