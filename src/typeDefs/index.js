@@ -1,44 +1,57 @@
 import { buildSchema } from 'graphql';
 
 export default buildSchema(`
+  type Answer {
+    text: String!
+    correct: Boolean
+  }
+  input AnswerInput {
+    text: String!
+    correct: Boolean
+  }
+
   type User {
     id: ID!
     email: String!
   }
   input UserInput {
-      email: String!
-      password: String!
+    email: String!
+    password: String!
   }
-  type Answer {
-      text: String!
-      correct: Boolean
+
+  type Question {
+    text: String!
+    answers: [Answer!]!
   }
-  input AnswerInput {
-      text: String!
-      correct: Boolean
+  input QuestionInput {
+    text: String!
+    answers: [AnswerInput!]!
   }
+
   type Quiz {
-      id: ID!
-      question: String!
-      answers: [Answer!]!
+    id: ID!
+    name: String!
+    questions: [Question!]!
   }
   input QuizInput {
-      id: ID
-      question: String!
-      answers: [AnswerInput!]!
+    id: ID
+    name: String!
+    questions: [QuestionInput!]!
   }
 
   type Query {
-      "Health Check"
-      hello: String!
-      quizFind(input: ID): [Quiz!]!
+    hi: String!
+    quizFind(input: ID): [Quiz!]!
   }
-  type Mutation {
-      authenticate(input: UserInput): String
-      userCreate(input: UserInput): User
 
-      quizCreate(input: QuizInput): String
-      quizDeleteOne(input: ID): String
-      quizUpdate(input: QuizInput): String
+  type Mutation {
+    authenticate(input: UserInput): String
+    userCreate(input: UserInput): String
+    userDelete(input: ID): String
+    userUpdate(input: UserInput): String
+
+    quizCreate(input: QuizInput): String
+    quizDelete(input: ID): String
+    quizUpdate(input: QuizInput): String
   }
 `);

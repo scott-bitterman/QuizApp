@@ -4,12 +4,16 @@ import Quiz from '../db/quiz.js';
 import CONSTANTS from '../constants.js';
 
 export default {
-  // Basic Existence
-  hello: () => {
-    return 'Howdy world!';
+  //-----------------------------------------------------------------------
+  // Health Check
+  //-----------------------------------------------------------------------
+  hi: () => {
+    return 'Howdy world. I am alive.';
   },
 
+  //-----------------------------------------------------------------------
   // User CRUD
+  //-----------------------------------------------------------------------
   authenticate: async ({input}) => {
     const authenticated = await User.authenticate(input);
     if (authenticated) {
@@ -19,23 +23,34 @@ export default {
     }
   },
   userCreate: async ({input}) => {
-    const user = await User.upsert(input);
-    const { id, email } = user;
-    return { id, email };
+    const user = await User.insertOne(input);
+    return user;
+  },
+  userDelete: async ({input}) => {
+    const user = await User.deleteOne(input);
+    return user;
+  },
+  userFind: async ({input}) => {
+    const user = await User.find(input);
+    return user;
+  },
+  userUpdate: async ({input}) => {
+    const user = await User.updateOne(input);
+    return user;
   },
 
+  //-----------------------------------------------------------------------
   // Quiz CRUD
+  //-----------------------------------------------------------------------
   quizCreate: async ({input}) => {
-    const quiz = await Quiz.insert(input);
+    const quiz = await Quiz.insertOne(input);
     return quiz;
   },
-  quizDeleteOne: async ({input}) => {
-    console.log(input)
+  quizDelete: async ({input}) => {
     const quiz = await Quiz.deleteOne(input);
     return quiz;
   },
   quizFind: async ({input}) => {
-    console.log('quizFind', {input});
     const quizes = await Quiz.find(input);
     return quizes;
   },

@@ -1,22 +1,27 @@
 /* 
   Possible Improvements:
-    Use the mongoose node module and create Mongo Schemas.
-    Properly subclass this base class for each collection
+    * Use the mongoose node module and create Mongo Schemas.
+    * Properly subclass this base class for each collection
 */
 import { ObjectId, MongoClient } from 'mongodb';
 import CONSTANTS from '../constants.js';
 
 export default class Mongo {
   constructor(collectionName) {
-    const { username, password, connection } = CONSTANTS.mongoDB;
+    const { db, username, password, connection } = CONSTANTS.mongoDB;
     const uri = `mongodb+srv://${username}:${password}${connection}`;
     this.collectionName = collectionName;
+    this.db = db;
     this.client = new MongoClient(uri);
   }
 
+  /**
+   * Helper for all db queries
+   * @returns Object
+   */
   async getCollection() {
     await this.client.connect();
-    const database = this.client.db('TrustLayer');
+    const database = this.client.db(this.db);
     const collection = database.collection(this.collectionName);
     return collection;
   }
@@ -25,16 +30,17 @@ export default class Mongo {
     try {
       const collection = await this.getCollection();
       const response = await collection.insertOne(input);
-      return response.insertedId;     
+      return response.insertedId.toString();     
     } finally {
       this.client.close();
     }  
   }
 
   async find(query) {
-    // console.log(query)
     try {
       const collection = await this.getCollection();
+      // const response0 = await collection.find(query).toArray();
+      // console.log(response0)
       const response = await (await collection.find(query).toArray()).map(({_id, ...rest}) => {
         return {id: _id.toString(), ...rest};
       });
@@ -45,9 +51,9 @@ export default class Mongo {
   }
 
   async deleteOne(idStr) {
-    const filter = { _id: new ObjectId(idStr) };
     try {
       const collection = await this.getCollection();
+      const filter = { _id: new ObjectId(idStr) };
       const response = await collection.deleteOne(filter);
       return idStr;     
     } finally {
