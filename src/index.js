@@ -10,7 +10,7 @@ const rootValue = require('./resolvers/index.js');
 
 const app = express();
 const middleware = (req, res, next) => {
-  console.log(req.headers);
+  console.log('Authorization', req.get('Authorization'));
   next();
 };
 
