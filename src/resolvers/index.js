@@ -18,6 +18,7 @@ module.exports = {
   authenticate: async ({input}) => {
     const authenticated = await User.authenticate(input);
     if (authenticated) {
+      // Using symmetric encryption here
       return jwt.sign({ email: input.email }, CONSTANTS.jwt.secret, { expiresIn: 60 * 60 });
     } else {
       return new Error('Authentication failed');

@@ -5,12 +5,12 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql'); // Alternately use Apollo-Server
 const schema = require('./typeDefs/index.js'); 
 
-// The rootValue provides a resolver function for every possible API call
+// The rootValue provides a resolver function for every all API calls
 const rootValue = require('./resolvers/index.js'); 
 
 const app = express();
 const middleware = (req, res, next) => {
-  // console.log(req.headers);
+  console.log(req.headers);
   next();
 };
 

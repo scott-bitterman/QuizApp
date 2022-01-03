@@ -17,10 +17,12 @@ module.exports = class Mongo {
 
   /**
    * Helper for all db queries
-   * @returns Object
+   * @returns Object - MongoCollection
    */
   async getCollection() {
+    console.log('Getting Mongo Collection - ATTEMPT');
     await this.client.connect();
+    console.log('Getting Mongo Collection - SUCCESS');
     const database = this.client.db(this.db);
     const collection = database.collection(this.collectionName);
     return collection;
@@ -29,7 +31,9 @@ module.exports = class Mongo {
   async insertOne(input) {
     try {
       const collection = await this.getCollection();
+      console.log('Mongo insertOne - ATTEMPT');
       const response = await collection.insertOne(input);
+      console.log('Mongo insertOne - SUCCESS');
       return response.insertedId.toString();     
     } finally {
       this.client.close();
@@ -39,11 +43,11 @@ module.exports = class Mongo {
   async find(query) {
     try {
       const collection = await this.getCollection();
-      // const response0 = await collection.find(query).toArray();
-      // console.log(response0)
+      console.log('Mongo find - ATTEMPT');
       const response = await (await collection.find(query).toArray()).map(({_id, ...rest}) => {
         return {id: _id.toString(), ...rest};
       });
+      console.log('Mongo find - SUCCESS');
       return response;     
     } finally {
       this.client.close();
@@ -54,7 +58,9 @@ module.exports = class Mongo {
     try {
       const collection = await this.getCollection();
       const filter = { _id: new ObjectId(idStr) };
+      console.log(`Mongo deleteOne id ${idStr} - ATTEMPT`);
       const response = await collection.deleteOne(filter);
+      console.log(`Mongo deleteOne id ${idStr} - SUCCESS`);
       return idStr;     
     } finally {
       this.client.close();
@@ -62,11 +68,12 @@ module.exports = class Mongo {
   }  
 
   async updateOne(idStr, update) {
-    console.log('In updateOne', {idStr, update});
-    const filter = { _id: new ObjectId(idStr) };
     try {
       const collection = await this.getCollection();
+      const filter = { _id: new ObjectId(idStr) };
+      console.log(`Mongo updateOne id ${idStr} - ATTEMPT`);
       const response = await collection.updateOne(filter, {$set: update});
+      console.log(`Mongo updateOne id ${idStr} - SUCCESS`);
       return idStr;     
     } finally {
       this.client.close();

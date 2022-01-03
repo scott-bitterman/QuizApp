@@ -18,6 +18,11 @@ module.exports = buildSchema(`
     email: String!
     password: String!
   }
+  input UserUpdateInput {
+      id: ID!
+      email: String
+      password: String
+  }
 
   type Question {
     text: String!
@@ -38,20 +43,26 @@ module.exports = buildSchema(`
     name: String!
     questions: [QuestionInput!]!
   }
+  input QuizUpdateInput {
+    id: ID!
+    name: String
+    questions: [QuestionInput!]
+  }
 
   type Query {
     hi: String!
     quizFind(input: ID): [Quiz!]!
+    userFind(input: ID): [User!]!
   }
 
   type Mutation {
     authenticate(input: UserInput): String
     userCreate(input: UserInput): String
     userDelete(input: ID): String
-    userUpdate(input: UserInput): String
+    userUpdate(input: UserUpdateInput): String
 
     quizCreate(input: QuizInput): String
     quizDelete(input: ID): String
-    quizUpdate(input: QuizInput): String
+    quizUpdate(input: QuizUpdateInput): String
   }
 `);

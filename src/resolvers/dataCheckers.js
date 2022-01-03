@@ -19,7 +19,7 @@ function validateQuestions(quiz) {
     if (1 === correctAnswers.length) {
       console.log(`Quiz question [${text}] has exactly one correct answer.`);
     } else {
-      throw new Error(`Quiz question [${text}] does not have exactly one correct answer. Instead it has ${correctAnswers.length} correct answers.`)
+      throw new Error(`Quiz question [${text}] must have exactly one correct answer. Instead it has ${correctAnswers.length} correct answers.`)
     }
     return true;
   }
