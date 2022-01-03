@@ -1,4 +1,9 @@
-function validateQuestions(quiz) {
+  /**
+   * Ensures questions are of the correct format
+   * @param {Object} quiz
+   * @returns {boolean|Error}
+   */
+  function validateQuestions(quiz) {
   if (quiz.questions.map(questionIsValid)) {
     return true;
   }

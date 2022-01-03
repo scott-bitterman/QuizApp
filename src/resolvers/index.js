@@ -58,6 +58,7 @@ module.exports = {
     return quizes;
   },
   quizUpdate: async ({input}) => {
+    validateQuestions(input);
     const quiz = await Quiz.updateOne(input);
     return quiz;
   },
