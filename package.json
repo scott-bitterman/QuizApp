@@ -17,7 +17,6 @@
   "author": "Scott Bitterman",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "3.5.0",
     "bcrypt": "5.0.1",
     "express": "4.17.2",
     "express-graphql": "0.12.0",
