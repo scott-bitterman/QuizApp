@@ -1,5 +1,5 @@
-import Mongo from './mongo.js';
-import bcrypt from 'bcrypt';
+const Mongo = require('./mongo.js');
+const bcrypt = require('bcrypt');
 const User = new Mongo('user');
 
 async function authenticate({ email, password }) {
@@ -33,7 +33,7 @@ async function updateOne({id, ...update}) {
   return userId;
 }
 
-export default {
+module.exports = {
   authenticate,
   deleteOne,
   find,

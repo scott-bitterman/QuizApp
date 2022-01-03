@@ -3,10 +3,10 @@
     * Use the mongoose node module and create Mongo Schemas.
     * Properly subclass this base class for each collection
 */
-import { ObjectId, MongoClient } from 'mongodb';
-import CONSTANTS from '../constants.js';
+const { ObjectId, MongoClient } = require('mongodb');
+const CONSTANTS = require('../constants.js');
 
-export default class Mongo {
+module.exports = class Mongo {
   constructor(collectionName) {
     const { db, username, password, connection } = CONSTANTS.mongoDB;
     const uri = `mongodb+srv://${username}:${password}${connection}`;

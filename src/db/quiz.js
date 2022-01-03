@@ -1,6 +1,6 @@
-import { responsePathAsArray } from 'graphql';
-import { ObjectId } from 'mongodb';
-import Mongo from './mongo.js';
+const { responsePathAsArray } = require('graphql');
+const { ObjectId } = require('mongodb');
+const Mongo = require('./mongo.js');
 const Quiz = new Mongo('quiz');
 
 async function deleteOne(id) {
@@ -25,7 +25,7 @@ async function updateOne({id, ...update}) {
   return quizId;
 }
 
-export default {
+module.exports = {
   deleteOne,
   find,
   insertOne,

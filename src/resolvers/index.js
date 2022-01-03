@@ -1,9 +1,10 @@
-import jwt from 'jsonwebtoken';
-import User from '../db/user.js';
-import Quiz from '../db/quiz.js';
-import CONSTANTS from '../constants.js';
+const jwt = require('jsonwebtoken');
+const User = require('../db/user.js');
+const Quiz = require('../db/quiz.js');
+const CONSTANTS = require('../constants.js');
+const { validateQuestions } = require('./dataCheckers.js');
 
-export default {
+module.exports = {
   //-----------------------------------------------------------------------
   // Health Check
   //-----------------------------------------------------------------------
@@ -43,6 +44,7 @@ export default {
   // Quiz CRUD
   //-----------------------------------------------------------------------
   quizCreate: async ({input}) => {
+    validateQuestions(input);
     const quiz = await Quiz.insertOne(input);
     return quiz;
   },

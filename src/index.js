@@ -1,12 +1,12 @@
-import express from 'express';
+const express = require('express');
 
 // GraphQL server-side package trends:
 // https://www.npmtrends.com/apollo-server-vs-express-graphql-vs-graphql-yoga-vs-prisma-vs-apollo-server-express
-import { graphqlHTTP } from 'express-graphql'; // Alternately use Apollo-Server
-import schema from './typeDefs/index.js'; 
+const { graphqlHTTP } = require('express-graphql'); // Alternately use Apollo-Server
+const schema = require('./typeDefs/index.js'); 
 
 // The rootValue provides a resolver function for every possible API call
-import rootValue from './resolvers/index.js'; 
+const rootValue = require('./resolvers/index.js'); 
 
 const app = express();
 const middleware = (req, res, next) => {
