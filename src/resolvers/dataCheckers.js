@@ -10,14 +10,12 @@ function validateQuestions(quiz) {
   function questionIsValid(question) {
     const { text, answers } = question;
     if (hasExactlyFourAnswers(answers)) {
-      console.log(`Quiz question [${text}] has exactly four answers.`);
     } else {
       throw new Error(`Quiz question [${text}] must have exactly four answers.`)
     }
 
     const correctAnswers = answers.filter(answer => answer.correct);
     if (1 === correctAnswers.length) {
-      console.log(`Quiz question [${text}] has exactly one correct answer.`);
     } else {
       throw new Error(`Quiz question [${text}] must have exactly one correct answer. Instead it has ${correctAnswers.length} correct answers.`)
     }
