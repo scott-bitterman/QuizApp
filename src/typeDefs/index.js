@@ -19,9 +19,9 @@ module.exports = buildSchema(`
     password: String!
   }
   input UserUpdateInput {
-      id: ID!
-      email: String
-      password: String
+    id: ID!
+    email: String
+    password: String
   }
 
   type Question {
@@ -37,6 +37,7 @@ module.exports = buildSchema(`
     id: ID!
     name: String!
     questions: [Question!]!
+    createdBy: String!
   }
   input QuizInput {
     id: ID

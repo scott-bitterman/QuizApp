@@ -62,18 +62,21 @@ Unhappy Paths :(
 ============================================================================= */ 
 test('Questions that do not have exactly four answers throw an error', () => {
 	const quizCopy = JSON.parse(JSON.stringify(quiz));
-	delete quizCopy.questions[0].answers[3];
+	// Remove an answer
+	delete quizCopy.questions[0].answers[3];  
 	expect(() => validateQuestions(quizCopy)).toThrow();
 });
 
 test('Questions that have no correct answers throw an error', () => {
 	const quizCopy = JSON.parse(JSON.stringify(quiz));
-	quizCopy.questions[0].answers[3].correct = false;
+	// Remove the only correct answer
+	quizCopy.questions[0].answers[3].correct = false; 
 	expect(() => validateQuestions(quizCopy)).toThrow();
 });
 
 test('Questions that have more than one correct answer throw an error', () => {
 	const quizCopy = JSON.parse(JSON.stringify(quiz));
-	quizCopy.questions[0].answers[2].correct = true;
+	// Set more than one answer to correct
+	quizCopy.questions[0].answers[2].correct = true;  
 	expect(() => validateQuestions(quizCopy)).toThrow();
 });

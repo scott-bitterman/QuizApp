@@ -1,20 +1,23 @@
 const express = require('express');
-
-// GraphQL server-side package trends:
-// https://www.npmtrends.com/apollo-server-vs-express-graphql-vs-graphql-yoga-vs-prisma-vs-apollo-server-express
+const expressJwt = require('express-jwt');
+const CONSTANTS = require('./constants');
 const { graphqlHTTP } = require('express-graphql'); // Alternately use Apollo-Server
 const schema = require('./typeDefs/index.js'); 
 
-// The rootValue provides a resolver function for every all API calls
+// The rootValue provides a resolver function for every API call
 const rootValue = require('./resolvers/index.js'); 
+const pathsNotRequiringAJWT = ['/graphql/authenticate'];
 
 const app = express();
-const middleware = (req, res, next) => {
-  console.log('Authorization', req.get('Authorization'));
-  next();
-};
+app.use(express.json());
 
-app.use(middleware);
+// Build GraphQL
+app.use('/graphql',
+  expressJwt({ secret: CONSTANTS.jwt.secret, algorithms: ['HS256'] }).unless({path: pathsNotRequiringAJWT}),
+  (_req, _res, next) => next()
+);
+
+// Build GraphQL
 app.use('/graphql', graphqlHTTP({
   schema,
   rootValue,

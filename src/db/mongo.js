@@ -1,7 +1,11 @@
 /* 
+  This is a base Mongo class for generalized querying.
+  It also acts as a factory for creating any number of interfaces 
+  by Mongo collection. See, e.g., Quiz and User.
+  
   Possible Improvements:
     * Use the mongoose node module and create Mongo Schemas.
-    * Properly subclass this base class for each collection
+    * Properly subclass this base class for each collection.
 */
 const { ObjectId, MongoClient } = require('mongodb');
 const CONSTANTS = require('../constants.js');
@@ -20,9 +24,9 @@ module.exports = class Mongo {
    * @returns Object - MongoCollection
    */
   async getCollection() {
-    console.log('Getting Mongo Collection - ATTEMPT');
+    // console.log('Mongo Connect - ATTEMPT');
     await this.client.connect();
-    console.log('Getting Mongo Collection - SUCCESS');
+    console.log('Mongo connect - SUCCESS');
     const database = this.client.db(this.db);
     const collection = database.collection(this.collectionName);
     return collection;
@@ -31,7 +35,6 @@ module.exports = class Mongo {
   async insertOne(input) {
     try {
       const collection = await this.getCollection();
-      console.log('Mongo insertOne - ATTEMPT');
       const response = await collection.insertOne(input);
       console.log('Mongo insertOne - SUCCESS');
       return response.insertedId.toString();     
@@ -40,13 +43,12 @@ module.exports = class Mongo {
     }  
   }
 
-  async find(query) {
+  async find(filter) {
     try {
       const collection = await this.getCollection();
-      console.log('Mongo find - ATTEMPT');
-      const response = await (await collection.find(query).toArray()).map(({_id, ...rest}) => {
+      const response = await (await collection.find(filter).toArray()).map(({_id, ...rest}) => {
         return {id: _id.toString(), ...rest};
-      });
+      }); // Convert all Mongo _id Objects to strings
       console.log('Mongo find - SUCCESS');
       return response;     
     } finally {
@@ -54,27 +56,23 @@ module.exports = class Mongo {
     }  
   }
 
-  async deleteOne(idStr) {
+  async deleteOne(filter) {
     try {
       const collection = await this.getCollection();
-      const filter = { _id: new ObjectId(idStr) };
-      console.log(`Mongo deleteOne id ${idStr} - ATTEMPT`);
       const response = await collection.deleteOne(filter);
-      console.log(`Mongo deleteOne id ${idStr} - SUCCESS`);
-      return idStr;     
+      console.log(`Mongo deleteOne - SUCCESS`);
+      return filter._id.toString();     
     } finally {
       this.client.close();
     }  
   }  
 
-  async updateOne(idStr, update) {
+  async updateOne(filter, update) {
     try {
       const collection = await this.getCollection();
-      const filter = { _id: new ObjectId(idStr) };
-      console.log(`Mongo updateOne id ${idStr} - ATTEMPT`);
       const response = await collection.updateOne(filter, {$set: update});
-      console.log(`Mongo updateOne id ${idStr} - SUCCESS`);
-      return idStr;     
+      console.log(`Mongo updateOne - SUCCESS`);
+      return filter._id.toString();
     } finally {
       this.client.close();
     }  

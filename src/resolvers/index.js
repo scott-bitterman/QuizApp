@@ -6,7 +6,7 @@ const { validateQuestions } = require('./dataCheckers.js');
 
 module.exports = {
   //-----------------------------------------------------------------------
-  // Health Check
+  // Howdy World
   //-----------------------------------------------------------------------
   hi: () => {
     return 'Howdy world. I am alive.';
@@ -16,10 +16,12 @@ module.exports = {
   // User CRUD
   //-----------------------------------------------------------------------
   authenticate: async ({input}) => {
-    const authenticated = await User.authenticate(input);
+    const user = await User.authenticate(input);
+    const { authenticated, email, id } = user;
     if (authenticated) {
-      // Using symmetric encryption here
-      return jwt.sign({ email: input.email }, CONSTANTS.jwt.secret, { expiresIn: 60 * 60 });
+      console.log('Authentication success:', email);
+      // Symmetric encryption
+      return jwt.sign({ email, id }, CONSTANTS.jwt.secret, { expiresIn: 60 * 60 });
     } else {
       return new Error('Authentication failed');
     }
@@ -44,22 +46,22 @@ module.exports = {
   //-----------------------------------------------------------------------
   // Quiz CRUD
   //-----------------------------------------------------------------------
-  quizCreate: async ({input}) => {
+  quizCreate: async ({input}, { user }) => {
     validateQuestions(input);
-    const quiz = await Quiz.insertOne(input);
+    const quiz = await Quiz.insertOne(input, user);
     return quiz;
   },
-  quizDelete: async ({input}) => {
-    const quiz = await Quiz.deleteOne(input);
+  quizDelete: async ({input}, { user }) => {
+    const quiz = await Quiz.deleteOne(input, user);
     return quiz;
   },
-  quizFind: async ({input}) => {
-    const quizes = await Quiz.find(input);
+  quizFind: async ({input}, { user }) => {
+    const quizes = await Quiz.find(input, user);
     return quizes;
   },
-  quizUpdate: async ({input}) => {
+  quizUpdate: async ({input}, { user }) => {
     validateQuestions(input);
-    const quiz = await Quiz.updateOne(input);
+    const quiz = await Quiz.updateOne(input, user);
     return quiz;
   },
 
