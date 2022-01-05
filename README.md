@@ -32,9 +32,9 @@ Once the app starts on your local machine, a GraphQL endpoint is available for t
 $ npm test
 ```
 
-## Security
+## Auth
 1. You must be authenticated to make any successful call to ```http://localhost:4000/graphql```.
-2. You should only be able to perform CRUD operations on a quiz, if you are the creator of the quiz. 
+2. You should only be authorized to perform CRUD operations on a quiz, if you are the creator of the quiz. 
 
 
 
