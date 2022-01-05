@@ -6,20 +6,26 @@ The TrustLayer Coding Challenge asks that a small project be built that stores q
 Component         | Implementation   | 
 ------------------|------------------|
 Datastore | MongoDB - live instance   |
-Security | Bcrypt, JWT  |
+Security | Bcrypt, JasonWebToken (JWT)  |
 API | Express, GraphQL  |
 Test | Jest  |
 
 
 ## Setup
-There is one modification that must be made for the project to work. Because the MongoDB instance is live, a password is required for the connection to work.
+There is one modification that must be made for the project to work. Because the MongoDB instance is live, a password is required.
 
 From the root:
 
 1. Rename ```src/constants.example.js``` to ```src/constants.js```  
-2.  Contact me to get the MongoDB password to test. 
+2. Supply the MongoDB password, which I can provide.
 3. ```$ npm install```
 4. ```$ npm start```
+
+## Use
+Once the app starts on your local machine, a GraphiQL endpoint is available for testing at ```http://localhost:4000/graphql```.
+
+1. Authenticate ```http://localhost:4000/graphql/authenticate``` returns a JWT that must be passed in the HTTP request ```Authorization``` header as ```Bearer {JWT}``` for all subsequent calls to ```http://localhost:4000/graphql```. There should be a user with the following credentials: ```{email: firstUser@trustlayer.com, password: 'firstUser'}```
+2. Run CRUD operations however you want.
 
 ## Testing
 ```
@@ -27,6 +33,8 @@ $ npm test
 ```
 
 ## Security
+1. You must be authenticated to make any successful call to ```http://localhost:4000/graphql```.
+2. You should only be able to perform CRUD operations on a quiz, if you are the creator of the quiz. 
 
 
 
