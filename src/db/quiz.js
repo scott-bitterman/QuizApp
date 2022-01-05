@@ -22,10 +22,10 @@ async function insertOne(input, user) {
   return quizId;
 }
 
-async function updateOne(idStr, user) {
-  const filter = createFilter(idStr, user);
+async function updateOne(update, user) {
+  const filter = createFilter(update.id, user);
   await checkAccess(filter);
-  const quizId = await Quiz.updateOne(id, update);
+  const quizId = await Quiz.updateOne(filter, update);
   return quizId;
 }
 
