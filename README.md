@@ -24,7 +24,7 @@ From the root:
 ## Use
 Once the app starts on your local machine, a GraphiQL endpoint is available for testing at ```http://localhost:4000/graphql```.
 
-1. Authenticate ```http://localhost:4000/graphql/authenticate``` returns a JWT that must be passed in the HTTP request ```Authorization``` header as ```Bearer {JWT}``` for all subsequent calls to ```http://localhost:4000/graphql```. There should be a user with the following credentials: ```{email: firstUser@trustlayer.com, password: 'firstUser'}```
+1. Authenticate ```http://localhost:4000/graphql/authenticate``` returns a JWT that must be passed in the HTTP request ```Authorization``` header as ```Bearer {JWT}``` for all subsequent calls to ```http://localhost:4000/graphql```. There should be a user with the following credentials: ```{email: "firstUser@tl.com", password: "firstUser"}```
 2. Run CRUD operations however you want.
 
 ## Testing
