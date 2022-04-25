@@ -1,7 +1,7 @@
 {
-  "name": "trustlayer_coding_challenge",
+  "name": "QuizApp",
   "version": "1.0.0",
-  "description": "TrustLayer Coding Challenge",
+  "description": "Exercise to use GraphQL to manage users and quizzes",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
@@ -9,10 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/taciturnip/TrustLayer"
+    "url": "https://github.com/taciturnip/QuizApp"
   },
   "keywords": [
-    "TrustLayer"
+    "QuizApp",
+    "User Management"
   ],
   "author": "Scott Bitterman",
   "license": "ISC",

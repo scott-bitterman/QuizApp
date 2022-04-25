@@ -1,6 +1,6 @@
-# TrustLayer Coding Challenge
+# Coding Challenge
 
-The TrustLayer Coding Challenge asks that a small project be built that stores quizzes and users in a persistent datastore. This datastore will allow Create, Read, Update, and Delete (CRUD) operations by an authenticated and authorized user. CRUD operations must be performed via an API with a REST or GraphQL interface. These are the broad strokes.
+This Coding Challenge asks that a small project be built that stores quizzes and users in a persistent datastore. This datastore will allow Create, Read, Update, and Delete (CRUD) operations by an authenticated and authorized user. CRUD operations must be performed via an API with a REST or GraphQL interface. These are the broad strokes.
 
 ## Tech Stack
 Component         | Implementation   | 
