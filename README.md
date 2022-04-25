@@ -6,7 +6,7 @@ This Coding Challenge asks that a small project be built that stores quizzes and
 Component         | Implementation   | 
 ------------------|------------------|
 Datastore | MongoDB - live instance   |
-Security | Bcrypt, JasonWebToken (JWT)  |
+Security | Bcrypt, JSONWebToken (JWT)  |
 API | Express, GraphQL  |
 Test | Jest  |
 
