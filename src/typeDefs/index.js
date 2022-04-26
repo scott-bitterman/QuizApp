@@ -51,7 +51,7 @@ module.exports = buildSchema(`
   }
 
   type Query {
-    hi: String!
+    health: String!
     quizFind(input: ID): [Quiz!]!
     userFind(input: ID): [User!]!
   }
