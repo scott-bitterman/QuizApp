@@ -21,6 +21,7 @@ module.exports = {
     if (authenticated) {
       console.log('Authentication success:', email);
       // Symmetric encryption
+      // Expires in 1 hour
       return jwt.sign({ email, id }, CONSTANTS.jwt.secret, { expiresIn: 60 * 60 });
     } else {
       return new Error('Authentication failed');

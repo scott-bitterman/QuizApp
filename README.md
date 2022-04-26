@@ -1,6 +1,6 @@
-# Coding Challenge
+# Quiz Creator with Users Exercise
 
-This Coding Challenge asks that a small project be built that stores quizzes and users in a persistent datastore. This datastore will allow Create, Read, Update, and Delete (CRUD) operations by an authenticated and authorized user. CRUD operations must be performed via an API with a REST or GraphQL interface. These are the broad strokes.
+This coding exercise asks that a small project be built that stores quizzes and users in a persistent datastore. This datastore will allow Create, Read, Update, and Delete (CRUD) operations by an authenticated and authorized user. CRUD operations must be performed using GraphQL, Express, and MongoDB. These are the broad strokes.
 
 ## Tech Stack
 Component         | Implementation   | 
