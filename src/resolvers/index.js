@@ -24,6 +24,8 @@ module.exports = {
       // Expires in 1 hour
       return jwt.sign({ email, id }, CONSTANTS.jwt.secret, { expiresIn: 60 * 60 });
     } else {
+      // A REST API would return an HTTP code of 401.
+      // GraphQL, by design, does not use HTTP codes to convey info
       return new Error('Authentication failed');
     }
   },
